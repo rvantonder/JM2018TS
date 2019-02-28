@@ -4,6 +4,8 @@
 
 int uninit_malloc_rec_decr(int x, int i, int* ptr1, int* ptr2) {
     if(i <= 1) {
+        free(ptr1);
+        free(ptr2);
         return 0;
     }
 

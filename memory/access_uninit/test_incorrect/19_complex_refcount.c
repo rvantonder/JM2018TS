@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#ifndef s_UNINIT_VAL_REFCOUNT
-#define s_UNINIT_VAL_REFCOUNT
+#ifndef s_MEMORY_AU_REFCOUNT
+#define s_MEMORY_AU_REFCOUNT
 void uninit_malloc_cont_init(MallocIntCont* cont) {
     cont->counter = 1;
     cont->data = malloc(sizeof(int));
@@ -55,7 +55,7 @@ void uninit_malloc_cont_set_value(MallocIntCont* cont, int value) {
     }
     *(cont->data) = value;
 }
-#endif //s_UNINIT_VAL_REFCOUNT
+#endif //s_MEMORY_AU_REFCOUNT
 
 int main() {
     MallocIntCont* cont;

@@ -1,0 +1,37 @@
+#include "resource_leak.h"
+#include "common.h"
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+void res_leak_cross_file(bool a, bool b) {
+    int val;
+    FILE* file;
+
+    if(!a & !b) {
+        return;
+    }
+    file = fopen("file.txt","r");
+
+    if(!file) {
+        return;
+    }
+
+    conditional_close(file, a, 0);
+
+    if(b & !a) {
+        val = (int) fgetc(file);
+        fclose(file);
+    } else {
+        val = 678;
+    }
+
+    printf("%i\n", val);
+}
+
+int main() {
+    res_leak_cross_file(true, true);
+    res_leak_cross_file(true, false);
+    res_leak_cross_file(false, true);
+    return 1;
+}
